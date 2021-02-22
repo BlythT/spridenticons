@@ -61,7 +61,7 @@ func drawSpridenticon(width int, height int, seed string) image.Image {
 	g := uint8(rand.Intn(100) + 100)
 	b := uint8(rand.Intn(100) + 100)
 
-	cyan := color.RGBA{r, g, b, 0xff}
+	randomColour := color.RGBA{r, g, b, 0xff}
 
 	mid := int(int64(width-1) / int64(2))
 
@@ -70,8 +70,10 @@ func drawSpridenticon(width int, height int, seed string) image.Image {
 			percent := rand.Intn(100)
 			switch {
 			case percent > 50:
-				img.Set(x, y, cyan)
-				img.Set(width-x-1, y, cyan)
+				// Draw pixels on one side of the canvas
+				img.Set(x, y, randomColour)
+				// Mirror the pixels horizontally for symmetry
+				img.Set(width-x-1, y, randomColour)
 			default:
 				// Use zero value.
 			}
